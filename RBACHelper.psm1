@@ -22,6 +22,7 @@ function Get-RBACHelperRoleGroup
     # Please use and distribute as you see fit.
     # If you make changes please send them back to me
     # so I can make updates (gene@genelaisne.com)
+    # (github.com/glaisne/RBACHelper)
     #
     # Of course, I'm not responsible if this script
     # breaks someting. :-)
@@ -51,21 +52,6 @@ function Get-RBACHelperRoleGroup
         }
 
         write-host "`r`n"
-
-#        write-host -fore cyan "RoleAssignemnts"
-#        write-host -fore cyan "-----------------------------------"
-#
-#        foreach ($RoleAssignemnt in $RoleGroup.RoleAssignments)
-#        {
-#            write-host $RoleAssignemnt
-#
-#            $RoleAssignment = get-ManagementRoleAssignment $RoleAssignemnt
-#
-#            write-host " RecipientReadScope :  $($RoleAssignment.RecipientReadScope)"
-#            write-host " ConfigReadScope    :  $($RoleAssignment.ConfigReadScope)"
-#            write-host " RecipientWriteScope:  $($RoleAssignment.RecipientWriteScope)"
-#            write-host " RecipientWriteScope:  $($RoleAssignment.RecipientWriteScope)"
-#        }
 
         $Roles = $RoleGroup.Roles
 
@@ -115,6 +101,19 @@ function Get-RBACHelperRoleGroup
 
 function Find-RBACHelperManagementRoleWithRoleEntry
 {
+
+<#
+.SYNOPSIS
+    Find Management Roles with specific Role Entry
+.DESCRIPTION
+    Given a specific Role Entry, this function will find 
+    all the 
+.EXAMPLE
+    Find-RBACHelperManagementRoleWithRoleEntry -RoleEntry "Get-Mailbox"
+.PARAMETER RoleEntry
+    The name of the RoleEntry (Exchange PowerShell command) to find.
+#>
+
     param(
         [Parameter(Mandatory=$true)]
         [string]$RoleEntry
@@ -159,13 +158,14 @@ function Get-RBACHelperCheatSheet
 
 <#
 .SYNOPSIS
-	Synopsis
+    Loads Microsoft's overview image of RBAC in the default web browser.
 .DESCRIPTION
-	description
+    Loads Microsoft's overview image of RBAC in the default web browser.
 .EXAMPLE
-	example
-.PARAMETER username
-	the username to modify
+    Get-RBACHelperCheatSheet
+
+    Creates the HTML file in the Temp ($env:Temp) directory and loads it
+    in the default web browser.
 #>
 	[CmdletBinding(SupportsShouldProcess=$true)]
 	param(
